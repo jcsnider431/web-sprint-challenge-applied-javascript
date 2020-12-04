@@ -19,4 +19,63 @@
 //
 // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
 //
+
+import axios from 'axios';
+console.log(axios);
+axios.get("https://lambda-times-api.herokuapp.com/articles")
+.then((res)=>{
+  const data = res.data.articles;
+  console.log(data);
+});
 // Use your function to create a card for each of the articles, and append each card to the DOM.
+
+
+function newArticle(article){
+const cardDiv = document.createElement('div');
+const headlineDiv = document.createElement('div');
+const authorDiv = document.createElement('div');
+const imgDiv = document.createElement('div');
+const image = document.createElement('img');
+const span = document.createElement('span');
+
+headlineDiv.textContent = article.headline;
+image.src = article.authorPhoto;
+span.textContent =`By ${article.authorsName}`;
+
+cardDiv.appendChild(headlineDiv);
+cardDiv.appendChild(authorDiv);
+authorDiv.appendChild(imgDiv);
+imgDiv.appendChild(image);
+authorDiv.appendChild(span);
+
+return cardDiv
+
+
+
+
+}
+const cardCont = document.querySelector('.cards-container');
+axios.get('https://lambda-times-api.herokuapp.com/articles')
+    .then((res)=>{
+        const data = res.data.articles;
+        function filterByID(id){
+            let names = {};
+            data.array.forEach(element => {
+                const newcards = newArticle(element)
+            });
+            if( id = 'javescript'){
+                names.push(id);
+            }else if( id = 'bootstrap'){
+                names.push(id);
+            }else if(id = 'technoloy'){
+                names.push(id);
+            }else if(id = 'jquery'){
+                names.push(id);
+            }else if(id = 'node'){
+                names.push(id);
+            
+        }
+        // const result = data.filter(title => ){}
+        const newCard = newArticle(data);
+        cardCont.appendChild(newCard);
+    })
