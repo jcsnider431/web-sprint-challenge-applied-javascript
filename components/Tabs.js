@@ -22,7 +22,7 @@ const result = axios
         data.forEach(item =>{
            const tabDiv = document.querySelector('.topics');
            const tabElement = document.createElement('span');
-           tabElement.classList.add('.tab')
+           tabElement.classList.add('tab')
            tabElement.textContent = `${item}`;
             tabDiv.appendChild(tabElement);
         })

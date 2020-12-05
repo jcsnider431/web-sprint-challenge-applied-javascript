@@ -40,42 +40,75 @@ const span = document.createElement('span');
 
 headlineDiv.textContent = article.headline;
 image.src = article.authorPhoto;
-span.textContent =`By ${article.authorsName}`;
+span.textContent =`By ${article.authorName}`;
 
+cardDiv.classList.add('card');
+headlineDiv.classList.add('headline');
+authorDiv.classList.add('author');
+imgDiv.classList.add('img-container');
 cardDiv.appendChild(headlineDiv);
 cardDiv.appendChild(authorDiv);
 authorDiv.appendChild(imgDiv);
 imgDiv.appendChild(image);
 authorDiv.appendChild(span);
 
+cardDiv.addEventListener('click',()=>{
+    console.log(headlineDiv)
+ })
 return cardDiv
-
-
-
-
 }
-const cardCont = document.querySelector('.cards-container');
-axios.get('https://lambda-times-api.herokuapp.com/articles')
-    .then((res)=>{
-        const data = res.data.articles;
-        function filterByID(id){
-            let names = {};
-            data.array.forEach(element => {
-                const newcards = newArticle(element)
-            });
-            if( id = 'javescript'){
-                names.push(id);
-            }else if( id = 'bootstrap'){
-                names.push(id);
-            }else if(id = 'technoloy'){
-                names.push(id);
-            }else if(id = 'jquery'){
-                names.push(id);
-            }else if(id = 'node'){
-                names.push(id);
-            
-        }
-        // const result = data.filter(title => ){}
-        const newCard = newArticle(data);
-        cardCont.appendChild(newCard);
+const card = document.querySelector('.cards-container');
+ axios.get('https://lambda-times-api.herokuapp.com/articles')
+     .then((res)=>{
+         const data = Object.create(res.data);
+         const cardData = Object.values(data.articles);
+         cardData.map((obj)=>{
+            obj.forEach(items =>{
+                card.appendChild(newArticle(items))
+            })
+        })
     })
+
+// axios.get('https://lambda-times-api.herokuapp.com/articles')
+//      .then((res)=>{
+//          let data = (res.data.articles)
+//          data.forEach(obj => {
+
+         
+//          let data2 = Object.keys(obj).map((e) =>{
+            
+//            return obj[e]
+
+//           })
+//           data2.forEach(items =>{
+//             card.appendChild(newArticle(items))
+//           })
+//         })
+//      })
+         // const result = data.filter(title => ){}
+        //  const newCard = newArticle(data.filter(filterByID));
+        //  cardCont.appendChild(newCard);
+             
+
+        // axios.get('https://lambda-times-api.herokuapp.com/articles')
+        // .then((res)=>{
+        //     let names = {}
+        //     const data = res.data.articles;
+        //     data.find(obj =>{
+        //         if( obj === 'javescript'){
+        //             names.push(obj);
+        //         }else if( obj === 'bootstrap'){
+        //             names.push(obj);
+        //         }else if( obj === 'technoloy'){
+        //             names.push(obj);
+        //         }else if(obj === 'jquery'){
+        //             names.push(obj);
+        //         }else if(obj === 'node'){
+        //             names.push(obj);
+        //         }}
+        //         names.forEach(item =>{
+        //             card.appendChild(newArticle(names))
+        //         })
+        //         );
+        //     })
+
